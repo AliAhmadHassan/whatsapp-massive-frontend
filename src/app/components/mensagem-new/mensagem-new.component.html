@@ -1,0 +1,62 @@
+<div class="col-md-6" style="margin-left:0%">
+    <div class="box box-info">
+      <div class="box-header with-border">
+        <h3 class="box-title">Mensagem</h3>
+      </div>
+      <form class="form-horizontal" #form="ngForm" (ngSubmit)="register()" novalidate>
+        <div [ngClass]="classCss" role="alert" *ngIf="message">
+          <strong>{{ message.text }}</strong>
+        </div>
+        <div class="box-body">
+          
+
+          <div [ngClass]="getFormGroupClass(texto.invalid,texto.dirty)">
+            <label for="inputTexto" class="col-sm-4 control-label">Texto</label>
+            <div class="col-sm-8">
+              <input type="text" 
+                      [(ngModel)]="mensagem.texto"
+                      name="texto" 
+                      class="form-control" 
+                      id="inputTexto" 
+                      placeholder="Texto"
+                      #texto="ngModel" 
+                      required>
+              <span class="help-block" *ngIf="texto.invalid && texto.dirty">Texto informado está invalido.</span>
+            </div>
+          </div>
+
+
+
+          <div [ngClass]="getFormGroupClass(tipoArquivo.invalid,tipoArquivo.dirty)">
+            <label for="inputTipoMensagem" class="col-sm-4 control-label">Tipo de Mensagem</label>
+            <div class="col-sm-8">
+              <select [(ngModel)]="mensagem.tipoArquivo" 
+                class="form-control select2" 
+                name="tipoArquivo"
+                id="inputTipoArquivo"
+                #tipoArquivo="ngModel"
+                style="width: 100%;"
+                required>
+                <option *ngFor="let tipoArquivo of listTipoArquivo" 
+                  [ngValue]="tipoArquivo"
+                  >{{tipoArquivo.nome}}</option>
+              </select>
+              <span class="help-block" *ngIf="tipoArquivo.invalid && tipoArquivo.dirty">Arquivo informado está invalido.</span>
+            </div>
+          </div>
+
+
+            <label for="inputCaminhoArquivo" class="col-sm-4 control-label">Arquivo</label>
+            <div class="col-sm-8">
+              <input type="file" 
+                id="inputCaminhoArquivo"  
+                (change)="onFileChange($event)">
+            </div>
+
+        </div>
+        <div class="box-footer">
+          <button type="submit" [disabled]="!form.valid" class="btn btn-info pull-right">Submit</button>
+        </div>
+      </form>
+    </div>
+    </div>

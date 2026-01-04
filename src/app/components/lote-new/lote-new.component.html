@@ -1,0 +1,50 @@
+<div class="col-md-6" style="margin-left:0%">
+    <div class="box box-info">
+      <div class="box-header with-border">
+        <h3 class="box-title">Lote</h3>
+      </div>
+      <form class="form-horizontal" #form="ngForm" (ngSubmit)="register()" novalidate>
+        <div [ngClass]="classCss" role="alert" *ngIf="message">
+          <strong>{{ message.text }}</strong>
+        </div>
+        <div class="box-body">
+          <div [ngClass]="getFormGroupClass(nome.invalid,nome.dirty)">
+            <label for="inputNome" class="col-sm-4 control-label">Nome</label>
+            <div class="col-sm-8">
+              <input type="text" 
+                      [(ngModel)]="lote.nome"
+                      name="nome" 
+                      class="form-control" 
+                      id="inputNome" 
+                      placeholder="Nome"
+                      #nome="ngModel" 
+                      required >
+              <span class="help-block" *ngIf="nome.invalid && nome.dirty">Nome informado está invalido.</span>
+            </div>
+          </div>
+  
+          <div [ngClass]="getFormGroupClass(campanha.invalid,campanha.dirty)">
+            <label for="inputCampanha" class="col-sm-4 control-label">Campanha</label>
+            <div class="col-sm-8">
+              <select [(ngModel)]="lote.campanha" 
+                  class="form-control select2" 
+                  name="campanha"
+                  id="inputCampanha"
+                  #campanha="ngModel"
+                  style="width: 100%;"
+                  required>
+                  <option *ngFor="let campanha of listCampanha" 
+                    [ngValue]="campanha"
+                    >{{campanha.nome}}</option>
+                </select>
+              <span class="help-block" *ngIf="campanha.invalid && campanha.dirty">Campanha informado está invalido.</span>
+            </div>
+          </div>
+          
+        </div>
+        <div class="box-footer">
+          <button type="submit" [disabled]="!form.valid" class="btn btn-info pull-right">Submit</button>
+        </div>
+      </form>
+    </div>
+    </div>

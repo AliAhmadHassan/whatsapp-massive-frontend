@@ -1,0 +1,65 @@
+<div class="col-md-6" style="margin-left:0%">
+  <div class="box box-info">
+    <div class="box-header with-border">
+      <h3 class="box-title">Usuario</h3>
+    </div>
+    <form class="form-horizontal" #form="ngForm" (ngSubmit)="register()" novalidate>
+      <div [ngClass]="classCss" role="alert" *ngIf="message">
+        <strong>{{ message.text }}</strong>
+      </div>
+      <div class="box-body">
+        <div [ngClass]="getFormGroupClass(nome.invalid,nome.dirty)">
+          <label for="inputNome" class="col-sm-2 control-label">Nome</label>
+          <div class="col-sm-10">
+            <input type="text" 
+                    [(ngModel)]="campanha.nome"
+                    name="nome" 
+                    class="form-control" 
+                    id="inputNome" 
+                    placeholder="Nome"
+                    #nome="ngModel" 
+                    required >
+            <span class="help-block" *ngIf="nome.invalid && nome.dirty">Nome informado está invalido.</span>
+          </div>
+        </div>
+
+        <div [ngClass]="getFormGroupClass(descricao.invalid,descricao.dirty)">
+          <label for="inputDescricao" class="col-sm-2 control-label">Descrição</label>
+          <div class="col-sm-10">
+            <input type="text" 
+                    [(ngModel)]="campanha.descricao"
+                    name="descricao" 
+                    class="form-control" 
+                    id="inputDescricao" 
+                    placeholder="Descrição"
+                    #descricao="ngModel" 
+                    required >
+            <span class="help-block" *ngIf="descricao.invalid && descricao.dirty">Descrição informado está invalido.</span>
+          </div>
+        </div>
+
+        <div [ngClass]="getFormGroupClass(mensagem.invalid,mensagem.dirty)">
+          <label for="inputMesagem" class="col-sm-2 control-label">Mensagem</label>
+          <div class="col-sm-10">
+            <select [(ngModel)]="campanha.mensagem" 
+                class="form-control select2" 
+                name="mensagem"
+                id="inputmensagem"
+                #mensagem="ngModel"
+                style="width: 100%;"
+                required>
+                <option *ngFor="let mensagem of listMensagens" 
+                  [ngValue]="mensagem"
+                  >{{mensagem.texto}}</option>
+              </select>
+            <span class="help-block" *ngIf="mensagem.invalid && mensagem.dirty">Mensagem informado está invalido.</span>
+          </div>
+        </div>
+        
+      </div>
+      <div class="box-footer">
+        <button type="submit" [disabled]="!form.valid" class="btn btn-info pull-right">Submit</button>
+      </div>
+    </form>
+  </div>
+  </div>

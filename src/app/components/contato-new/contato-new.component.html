@@ -1,0 +1,100 @@
+<div class="col-md-6" style="margin-left:0%">
+  <div class="box box-info">
+    <div class="box-header with-border">
+      <h3 class="box-title">Contato</h3>
+    </div>
+    <form class="form-horizontal" #form="ngForm" (ngSubmit)="register()" novalidate>
+      <div [ngClass]="classCss" role="alert" *ngIf="message">
+        <strong>{{ message.text }}</strong>
+      </div>
+      <div class="box-body">
+
+
+        <div [ngClass]="getFormGroupClass(ddd.invalid,ddd.dirty)">
+          <label for="inputaDDD" class="col-sm-2 control-label">DDD</label>
+          <div class="col-sm-10">
+            <input type="text" 
+            [(ngModel)]="contato.ddd"
+            name="ddd" 
+            class="form-control" 
+            id="inputDDD" 
+            placeholder="ddd"
+            #ddd="ngModel" 
+            required >
+            <span class="help-block" *ngIf="ddd.invalid && ddd.dirty">DDD informado está invalido.</span>
+          </div>
+        </div>
+
+        <div [ngClass]="getFormGroupClass(telefone.invalid,telefone.dirty)">
+          <label for="inputTelefone" class="col-sm-2 control-label">Telefone</label>
+          <div class="col-sm-10">
+            <input type="text" 
+                    [(ngModel)]="contato.numeroTelefone"
+                    name="telefone" 
+                    class="form-control" 
+                    id="inputTelefone" 
+                    placeholder="Telefone"
+                    #telefone="ngModel" 
+                    required >
+            <span class="help-block" *ngIf="telefone.invalid && telefone.dirty">Telefone informado está invalido.</span>
+          </div>
+        </div>
+
+        <div [ngClass]="getFormGroupClass(nome.invalid,nome.dirty)">
+          <label for="inputNome" class="col-sm-2 control-label">Nome</label>
+          <div class="col-sm-10">
+            <input type="text" 
+                    [(ngModel)]="contato.nome"
+                    name="nome" 
+                    class="form-control" 
+                    id="inputNome" 
+                    placeholder="Nome"
+                    #nome="ngModel" 
+                    required >
+            <span class="help-block" *ngIf="nome.invalid && nome.dirty">Nome informado está invalido.</span>
+          </div>
+        </div>
+        
+        <div [ngClass]="getFormGroupClass(lote.invalid,lote.dirty)">
+          <label for="inputLote" class="col-sm-4 control-label">Lote</label>
+          <div class="col-sm-8">
+            <select [(ngModel)]="contato.lote" 
+                class="form-control select2" 
+                name="lote"
+                id="inputLote"
+                #lote="ngModel"
+                style="width: 100%;"
+                required>
+                <option *ngFor="let lote of listLotes" 
+                  [ngValue]="lote"
+                  >{{lote.nome}}</option>
+              </select>
+            <span class="help-block" *ngIf="lote.invalid && lote.dirty">Lote informado está invalido.</span>
+          </div>
+        </div>
+
+        <div [ngClass]="getFormGroupClass(contatoStatus.invalid,contatoStatus.dirty)">
+          <label for="inputContatoStatus" class="col-sm-4 control-label">Contato Status</label>
+          <div class="col-sm-8">
+            <select [(ngModel)]="contato.contatoStatus" 
+                class="form-control select2" 
+                name="contatoStatus"
+                id="inputContatoStatus"
+                #contatoStatus="ngModel"
+                style="width: 100%;"
+                required>
+                <option *ngFor="let contatoStatus of listContatoStatus" 
+                  [ngValue]="contatoStatus"
+                  >{{contatoStatus.nome}}</option>
+              </select>
+            <span class="help-block" *ngIf="contatoStatus.invalid && contatoStatus.dirty">Contato Status informado está invalido.</span>
+          </div>
+        </div>
+
+      </div>
+      <div class="box-footer">
+        <button type="submit" [disabled]="!form.valid" class="btn btn-info pull-right">Submit</button>
+      </div>
+    </form>
+  </div>
+  </div>

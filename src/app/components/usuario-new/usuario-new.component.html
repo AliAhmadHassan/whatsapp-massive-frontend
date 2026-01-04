@@ -1,0 +1,96 @@
+<div class="col-md-6" style="margin-left:0%">
+  <div class="box box-info">
+    <div class="box-header with-border">
+      <h3 class="box-title"><img src="../../../assets/image/User-blue-icon-64.png"/> Usuario</h3>
+    </div>
+    <form class="form-horizontal" #form="ngForm" (ngSubmit)="register()" novalidate>
+      <div [ngClass]="classCss" role="alert" *ngIf="message">
+        <strong>{{ message.text }}</strong>
+      </div>
+      <div class="box-body">
+        <div [ngClass]="getFormGroupClass(username.invalid,username.dirty)">
+          <label for="inputUsername" class="col-sm-2 control-label">Username</label>
+          <div class="col-sm-10">
+            <input type="text" 
+                    [(ngModel)]="usuario.username"
+                    name="username"
+                    class="form-control" 
+                    id="inputUsername" 
+                    #username="ngModel"
+                    placeholder="Username"
+                    username>
+            <span class="help-block" *ngIf="username.invalid  && username.dirty">Username informado está invalido. </span>
+          </div>
+        </div>
+
+        <div [ngClass]="getFormGroupClass(nome.invalid,nome.dirty)">
+          <label for="inputNome" class="col-sm-2 control-label">Nome</label>
+          <div class="col-sm-10">
+            <input type="text" 
+                    [(ngModel)]="usuario.nome"
+                    name="nome" 
+                    class="form-control" 
+                    id="inputNome" 
+                    placeholder="Nome"
+                    #nome="ngModel" 
+                    required >
+            <span class="help-block" *ngIf="nome.invalid && nome.dirty">Nome informado está invalido.</span>
+          </div>
+        </div>
+
+        <div [ngClass]="getFormGroupClass(email.invalid,email.dirty)">
+          <label for="inputEMail" class="col-sm-2 control-label">EMail</label>
+          <div class="col-sm-10">
+            <input type="text" 
+                    [(ngModel)]="usuario.email"
+                    name="email" 
+                    class="form-control" 
+                    id="inputNome" 
+                    placeholder="EMail"
+                    #email="ngModel" 
+                    required >
+            <span class="help-block" *ngIf="email.invalid && email.dirty">EMail informado está invalido.</span>
+          </div>
+        </div>
+
+        <div [ngClass]="getFormGroupClass(senha.invalid,senha.dirty)">
+          <label for="inputSenha" class="col-sm-2 control-label">Senha</label>
+          <div class="col-sm-10">
+            <input type="password" 
+                    [(ngModel)]="usuario.password"
+                    name="senha" 
+                    class="form-control" 
+                    id="inputSenha" 
+                    placeholder="Senha"
+                    #senha="ngModel" 
+                    required>
+            <span class="help-block" *ngIf="senha.invalid && senha.dirty">Senha informado está invalido.</span>
+          </div>
+        </div>
+
+
+        
+        <div [ngClass]="getFormGroupClass(profile.invalid,profile.dirty)">
+          <label for="inputProfile" class="col-sm-2 control-label">Perfil</label>
+          <div class="col-sm-10">
+            <select [(ngModel)]="usuario.profile" 
+                class="form-control select2" 
+                name="profile"
+                id="inputProfile"
+                #profile="ngModel"
+                style="width: 100%;"
+                required>
+                <option value="ROLE_MANAGER">Gerente</option>
+                <option selected value="ROLE_ATTENDANT">Normal</option>
+              </select>
+            <span class="help-block" *ngIf="profile.invalid && profile.dirty">Profile é obrigatorio.</span>
+          </div>
+        </div>
+        
+      </div>
+      <div class="box-footer">
+        <button type="submit" [disabled]="!form.valid" class="btn btn-info pull-right">Submit</button>
+      </div>
+    </form>
+  </div>
+  </div>

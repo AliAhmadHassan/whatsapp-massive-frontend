@@ -1,0 +1,1 @@
+export const WHATSAPPMASSIVE_API: string = 'http://201.52.225.182:8090';
